@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>平滑过渡</title>
+	<!-- 目的：
+	1.全面复习css选择器
+	2.css3中的动画
+	3.基本样式操作
+	4.字体图标
+	 -->
+	<style>
+		@font-face{
+			font-family:"myFont";
+			font-size:normal;
+			font-weight:normal;
+			src:url('fonts/raphaelicons-webfont.eot') format('eot'),
+				url('fonts/raphaelicons-webfont.svg') format('svg'),
+				url('fonts/raphaelicons-webfont.ttf') format('truetype'),
+				url('fonts/raphaelicons-webfont.woff') format('woff');
+		}
+		*{padding: 0;margin: 0;}
+		ul{list-style: none;}
+		html,body{
+			height: 100%;
+			width: 100%;
+		}
+		#main{
+			width: 100%;
+			height: 100%;
+			background-color:#fff;
+			position: relative;
+			overflow: hidden;
+		}
+		#main>a,#main>input{
+			color: #fff;
+			display: block;
+			width: 20%;
+			height: 50px;
+			line-height: 50px;
+			position: absolute;
+			bottom: 0;
+		}
+		#main>a{
+			font-size: 20px;
+			text-decoration: none;
+			background-color: #e23a6e;
+			text-align: center;
+			z-index: 99;
+		}
+		#main>input{
+			z-index: 100;
+			opacity: 0;
+			cursor: pointer;
+		}
+		#main>.menu1{left: 0%;}
+		#main>.menu2{left: 20%;}
+		#main>.menu3{left: 40%;}	
+		#main>.menu4{left: 60%;}
+		#main>.menu5{left:80%;}
+		#main>input:hover+a{background-color: #ad244f;}
+		#main>input:checked+a{background-color: #821134;}
+		#main>input:checked+a:before{
+			content:'';
+			display: block;
+			width: 0;height: 0;line-height:0;
+			border-style: dotted dashed solid dashed;
+			border-color: transparent;
+			border-bottom-color: #821134;
+			border-width: 15px;
+			position: absolute;
+			left: 50%;bottom: 100%;
+			transform: translateX(-50%);
+		}
+		/*scroll部分*/
+		#main>input.menu1:checked~.scroll{
+			transform: translateY(0%);
+		}
+		#main>input.menu2:checked~.scroll{
+			transform: translateY(-20%);
+		}
+		#main>input.menu3:checked~.scroll{
+			transform: translateY(-40%);
+		}
+		#main>input.menu4:checked~.scroll{
+			transform: translateY(-60%);
+		}
+		#main>input.menu5:checked~.scroll{
+			transform: translateY(-80%);
+		}
+		#main>.scroll{
+			width: 100%;height: 500%;
+			transition: all 0.6s linear;
+		}
+		#main>.scroll>.part{
+			width: 100%;height: 20%;
+			position: relative;
+			font-size: 50px;
+		}
+		#main>.scroll>.part:nth-child(odd){
+			color: #e23a6e;
+		}
+		#main>.scroll>.part:nth-child(even){
+			color: #fff;
+		}
+		#main>.scroll>.part:before{
+			content:'';
+			position: absolute;top: 0;left: 50%;
+			border-style: solid dashed dotted  dashed;
+			border-width: 120px;
+			border-color: transparent;
+			width: 0;height: 0;line-height: 0;
+			transform: translateX(-50%);
+		}
+		#main>.scroll>.part:nth-child(odd):before{
+			border-top-color: #e23a6e;
+			
+		}
+		#main>.scroll>.part:nth-child(even):before{
+			border-top-color:#fff;
+			
+		}
+		#main>.scroll>.part:after{
+			content:attr(data-icon);
+			font-family: 'myFont';
+			position: absolute;top: 20px;left: 50%;
+			transform: translateX(-50%);
+			font-size: 50px;
+		}
+		#main>.scroll>.part:nth-child(odd):after{
+			color: white;
+		}
+		#main>.scroll>.part:nth-child(even):after{
+			color: #e23a6e;
+		}
+		#main>.scroll>.part:nth-child(even){
+			background-color: #e23a6e;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="main">
+		
+			<input type="radio" name="menu" class="menu1">
+			<a href="#" class="menu1">Monday</a>
+
+			<input type="radio" name="menu" class="menu2">
+			<a href="#" class="menu2">Tuesday</a>
+
+	 		<input type="radio" name="menu" class="menu3">
+			<a href="#" class="menu3">Wednesday</a>
+
+	 		<input type="radio" name="menu" class="menu4">
+			<a href="#" class="menu4">Thursday</a>
+
+	 		<input type="radio" name="menu" class="menu5">
+			<a href="#" class="menu5">Friday</a>
+
+			<div class="scroll">
+				<div class="part part1" data-icon="U">Monday</div>
+				<div class="part part2" data-icon="]">Tuesday</div>
+				<div class="part part3" data-icon="b">Wednesday</div>
+				<div class="part part4" data-icon="h">Thursday</div>
+				<div class="part part5" data-icon="x">Friday</div>
+			</div>
+	</div>
+</body>
+</html>
